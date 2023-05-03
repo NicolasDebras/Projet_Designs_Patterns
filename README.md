@@ -1,4 +1,4 @@
-#Projet Designs Patterns en C#
+# Projet Designs Patterns en C#
 
 ##Informations pratiques
 Le code rendu devra compiler sans erreur.
