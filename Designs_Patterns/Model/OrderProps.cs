@@ -5,10 +5,10 @@ namespace Designs_Patterns.Model
 	{
 		public OrderProps()
 		{
-			order = new List<PizzaProps>();
+			order = new List<Tuple<PizzaProps, int>>();
         }
 
-        public List<PizzaProps> order { get; set; }
+        public List<Tuple<PizzaProps, int>> order { get; set; }
 
     }
 }

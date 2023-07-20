@@ -1,4 +1,5 @@
 ﻿using System;
+using Designs_Patterns.Error.Billing;
 using Designs_Patterns.Model;
 
 namespace Designs_Patterns.Service
@@ -7,7 +8,7 @@ namespace Designs_Patterns.Service
 	{
 		public OrderProps orderProps { get; set; }
 
-		public int total { get; set; }
+		public double total { get; set; }
 
 		public billingService(OrderProps orderProps)
 		{
@@ -18,16 +19,19 @@ namespace Designs_Patterns.Service
 		public void printbilling()
 		{
 			if (orderProps.order.Count == 0)
-				throw new Exception("Pas de pizza");
+				throw new NoPizzaBillingException();
 
-			foreach (PizzaProps pizza in orderProps.order)
+            Console.WriteLine("Facture :");
+            foreach (Tuple<PizzaProps, int> order in orderProps.order)
 			{
-				total += pizza.prix;
-				Console.WriteLine(pizza.title + " --------------- " + pizza.prix);
-
+				total += order.Item1.prix * order.Item2;
+				Console.WriteLine("" + order.Item2 + " " + order.Item1.title + " : " + order.Item2 + " * " + order.Item1.prix + "€");
+				foreach (IngerdientsProps ingerdients in order.Item1.recipe)
+				{
+					Console.WriteLine(ingerdients.foodProps.name + " " + ingerdients.quantity);
+				}
 			}
-			Console.WriteLine("\n-----------------\n\n");
-            Console.WriteLine("Total :" + total);
+            Console.WriteLine("Prix total : " + total + "€");
 
         }
     }

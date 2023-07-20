@@ -10,9 +10,15 @@
   <ItemGroup>
     <None Remove="Model\" />
     <None Remove="Service \" />
+    <None Remove="Error\" />
+    <None Remove="Error\Order\" />
+    <None Remove="Error\Billing\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Service \" />
+    <Folder Include="Error\" />
+    <Folder Include="Error\Order\" />
+    <Folder Include="Error\Billing\" />
   </ItemGroup>
 </Project>
