@@ -1,4 +1,5 @@
 ﻿using System;
+using Designs_Patterns.Factory;
 using Designs_Patterns.Model;
 
 namespace Designs_Patterns.Service
@@ -20,14 +21,14 @@ namespace Designs_Patterns.Service
 			{
 				for(int i = 0; i != order.Item2; i++)
 				{
-					Console.WriteLine(order.Item1.title);
-					Console.WriteLine("Préparer la pâte");
-					foreach(IngerdientsProps ingerdients in order.Item1.recipe)
-					{
-						Console.WriteLine("Ajouter " + ingerdients.foodProps.name);
-					}
+					if (order.Item1.title == "Regina")
+						ReginaPizzaFactory.Instance.MakingPizza(order.Item1);
+					else if (order.Item1.title == "4 Saisons")
+						QuatreSaisonsPizzaFactory.Instance.MakingPizza(order.Item1);
+					else
+						VegetariennePizzaFactory.Instance.MakingPizza(order.Item1);
 
-				}
+                }
 
 				
 			}

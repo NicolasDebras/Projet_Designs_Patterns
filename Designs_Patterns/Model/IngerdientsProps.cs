@@ -1,4 +1,6 @@
 ﻿using System;
+using Designs_Patterns.Visitor;
+
 namespace Designs_Patterns.Model
 {
 	/// <summary>
@@ -20,6 +22,11 @@ namespace Designs_Patterns.Model
 		public double quantity { get; set; }
 
 		public FoodProps foodProps { get; set; }
-	}
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
+    }
 }
 

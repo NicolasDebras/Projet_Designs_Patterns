@@ -1,5 +1,6 @@
 ﻿using System;
 using Designs_Patterns.Model;
+using Designs_Patterns.Visitor;
 
 namespace Designs_Patterns
 {
@@ -17,6 +18,12 @@ namespace Designs_Patterns
 		public string title { get; set; }
 
 		public double prix { get; set; }
+
+
+        public void Accept(IVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
 

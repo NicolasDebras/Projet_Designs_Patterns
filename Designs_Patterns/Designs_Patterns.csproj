@@ -13,6 +13,8 @@
     <None Remove="Error\" />
     <None Remove="Error\Order\" />
     <None Remove="Error\Billing\" />
+    <None Remove="Factory\" />
+    <None Remove="Visitor\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
@@ -20,5 +22,7 @@
     <Folder Include="Error\" />
     <Folder Include="Error\Order\" />
     <Folder Include="Error\Billing\" />
+    <Folder Include="Factory\" />
+    <Folder Include="Visitor\" />
   </ItemGroup>
 </Project>
