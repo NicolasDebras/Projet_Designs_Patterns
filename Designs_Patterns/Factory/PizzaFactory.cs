@@ -7,7 +7,7 @@ namespace Designs_Patterns.Factory
     {
         public abstract PizzaProps CreatePizza();
 
-        public void MakingPizza(PizzaProps pizza)
+        public virtual void MakingPizza(PizzaProps pizza)
         {
             Console.WriteLine("Préparer la pâte");
             foreach (IngerdientsProps ingerdients in pizza.recipe)

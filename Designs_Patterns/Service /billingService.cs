@@ -34,6 +34,11 @@ namespace Designs_Patterns.Service
             Console.WriteLine("Prix total : " + total + "€");
 
         }
+
+        public void ApplyPromotion(IPromotionStrategy strategy)
+        {
+            strategy.ApplyPromotion(orderProps);
+        }
     }
 }
 

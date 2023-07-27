@@ -2,48 +2,39 @@
 using Designs_Patterns.Factory;
 using Designs_Patterns.Model;
 using Designs_Patterns.Service;
-using Designs_Patterns.Visitor;
+using Designs_Patterns.Strategy;
 
-
-List<PizzaProps> InitMenu = new List<PizzaProps>();
-InitMenu.Add(ReginaPizzaFactory.Instance.CreatePizza());
-InitMenu.Add(QuatreSaisonsPizzaFactory.Instance.CreatePizza());
-InitMenu.Add(VegetariennePizzaFactory.Instance.CreatePizza());
-
-
-RestaurantProps restaurant = new RestaurantProps(InitMenu);
-
-
-OrderService order = new OrderService(restaurant);
-
-while (true)
+public class Program
 {
-    OrderProps res = order.CreateOrder();
-
-    billingService billing = new billingService(res);
-    billing.printbilling();
-
-    MakingService making = new MakingService(res);
-    making.Making();
-
-    var visitor = new ListIngredientsVisitor();
-    foreach (var tuple in res.order)
+    public static void Main(string[] args)
     {
-        var pizza = tuple.Item1;
-        pizza.Accept(visitor); 
-    }
-    foreach (var ingredient in visitor.IngredientsUsage)
-    {
-        double totalQuantity = ingredient.Value.Values.Sum();
-        Console.WriteLine($"{ingredient.Key.name} : {totalQuantity}");
-        foreach (var pizza in ingredient.Value)
+        List<PizzaProps> InitMenu = new List<PizzaProps>();
+        InitMenu.Add(ReginaPizzaFactory.Instance.CreatePizza());
+        InitMenu.Add(QuatreSaisonsPizzaFactory.Instance.CreatePizza());
+        InitMenu.Add(VegetariennePizzaFactory.Instance.CreatePizza());
+        InitMenu.Add(CalzonePizzaFactory.Instance.CreatePizza());
+
+        RestaurantProps restaurant = new RestaurantProps(InitMenu);
+
+        OrderService order = new OrderService(restaurant);
+
+        while (true)
         {
-            Console.WriteLine($"- {pizza.Key.title} : {pizza.Value}");
+            OrderProps res = order.CreateOrder();
+
+            billingService billing = new billingService(res);
+            var promotionStrategy = new GroupPromotionStrategy();
+
+            billing.ApplyPromotion(promotionStrategy);
+
+            billing.printbilling();
+
+            MakingService making = new MakingService(res);
+            making.Making();
+            making.ListIngredientUse(res);
         }
     }
-
 }
-
 
 
 

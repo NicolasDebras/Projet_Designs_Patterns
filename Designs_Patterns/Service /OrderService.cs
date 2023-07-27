@@ -14,11 +14,16 @@ namespace Designs_Patterns.Service
 
 		public RestaurantProps restaurant { get; set; }
 
+        public virtual string RecupInput()
+        {
+            return Console.ReadLine();
+        }
+
 		public OrderProps CreateOrder()
 		{
 			OrderProps res = new OrderProps();
             Console.WriteLine("Veuillez saisir votre commande :");
-            string input = Console.ReadLine();
+            string input = RecupInput();
 
             res.order = ParsePizzaOrders(input);
 
@@ -40,7 +45,6 @@ namespace Designs_Patterns.Service
                         quantity = (int)Char.GetNumericValue(orderItem[1]);
                     else
                         quantity = (int)Char.GetNumericValue(orderItem[0]);
-                    Console.WriteLine(orderItem[0]);
                 }
                 catch {
                     throw new NotValueOrderException();
